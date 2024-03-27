@@ -149,14 +149,6 @@ char minValueIn(const char arr[], const int n) {
     return min_val;
 }
 
-char minValueIn(const char arr[], const int n) {
-    char min_val = arr[0];
-    for (int i = 1; i < n; i++) {
-        if (arr[i] < min_val) min_val = arr[i];
-    }
-    return min_val;
-}
-
 int maxValueIn(const int arr[], const int n) {
     int max_val = arr[0];
     for (int i = 1; i < n; i++) {
