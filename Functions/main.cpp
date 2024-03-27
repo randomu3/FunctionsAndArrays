@@ -3,15 +3,38 @@
 
 using namespace std;
 
-void FillRand(int arr[], const int n); // заполн€ет массив случайными числами
-void Print(const int arr[], const int n); // выводит массив на экран
-int Sum(const int arr[], const int n); // возвращает сумму элементов массива
-double Avg(const int arr[], const int n); // возвращает среднее-арифметическое элементов массива
-int minValueIn(const int arr[], const int n); // возвращает минимальное значение в массиве
-int maxValueIn(const int arr[], const int n); // возвращает максимальное значение в массиве
-void shiftLeft(int arr[], const int n, int shift); // циклически сдвигает массив на заданное число элементов влево
-void shiftRight(int arr[], const int n, int shift); // циклически сдвигает массив на заданное число элементов вправо
+void FillRand(int arr[], const int n);
+void FillRand(double arr[], const int n);
+void FillRand(char arr[], const int n);
 
+void Print(const int arr[], const int n);
+void Print(const double arr[], const int n);
+void Print(const char arr[], const int n);
+
+int Sum(const int arr[], const int n);
+double Sum(const double arr[], const int n);
+int Sum(const char arr[], const int n);
+
+double Avg(const int arr[], const int n);
+double Avg(const double arr[], const int n);
+double Avg(const char arr[], const int n);
+
+int minValueIn(const int arr[], const int n);
+double minValueIn(const double arr[], const int n);
+char minValueIn(const char arr[], const int n);
+double minValueIn(const double arr[], const int n);
+
+int maxValueIn(const int arr[], const int n);
+double maxValueIn(const double arr[], const int n);
+char maxValueIn(const char arr[], const int n);
+
+void shiftLeft(int arr[], const int n, int shift);
+void shiftLeft(double arr[], const int n, int shift);
+void shiftLeft(char arr[], const int n, int shift);
+
+void shiftRight(int arr[], const int n, int shift);
+void shiftRight(char arr[], const int n, int shift);
+void shiftRight(double arr[], const int n, int shift);
 
 int main() {
     const int n = 10;
