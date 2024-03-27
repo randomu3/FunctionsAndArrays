@@ -68,12 +68,6 @@ void FillRand(char arr[], const int n) {
     }
 }
 
-void FillRand(char arr[], const int n) {
-    for (int i = 0; i < n; i++) {
-        arr[i] = 'a' + rand() % 26;
-    }
-}
-
 void Print(const int arr[], const int n) {
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
@@ -149,14 +143,6 @@ double minValueIn(const double arr[], const int n) {
 
 char minValueIn(const char arr[], const int n) {
     char min_val = arr[0];
-    for (int i = 1; i < n; i++) {
-        if (arr[i] < min_val) min_val = arr[i];
-    }
-    return min_val;
-}
-
-double minValueIn(const double arr[], const int n) {
-    double min_val = arr[0];
     for (int i = 1; i < n; i++) {
         if (arr[i] < min_val) min_val = arr[i];
     }
