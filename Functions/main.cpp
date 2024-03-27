@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 
+#define DEFAULT_MAX_VALUE 100
+
 using namespace std;
 
-void FillRand(int arr[], const int n);
-void FillRand(double arr[], const int n);
+void FillRand(int arr[], const int n, const int max = DEFAULT_MAX_VALUE);
+void FillRand(double arr[], const int n, const double max = DEFAULT_MAX_VALUE);
 void FillRand(char arr[], const int n);
 
 void Print(const int arr[], const int n);
@@ -57,15 +59,15 @@ int main() {
     return 0;
 }
 
-void FillRand(int arr[], const int n) {
+void FillRand(int arr[], const int n, const int max) {
     for (int i = 0; i < n; i++) {
-        arr[i] = rand() % 100;
+        arr[i] = rand() % max;
     }
 }
 
-void FillRand(double arr[], const int n) {
+void FillRand(char arr[], const int n) {
     for (int i = 0; i < n; i++) {
-        arr[i] = (double)rand() / RAND_MAX * 100.0;
+        arr[i] = 'a' + rand() % 26;
     }
 }
 
