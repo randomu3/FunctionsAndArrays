@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 #include <cstdlib>
 
-#define DEFAULT_MAX_VALUE 100
-#define MAX_COLS 100
+#define DEFAULT_MAX_VALUE 10
+#define MAX_COLS 10
 
 using namespace std;
 
@@ -27,7 +27,7 @@ void shiftLeft(double arr[][MAX_COLS], int rows, int cols, int shift);
 void shiftRight(double arr[][MAX_COLS], int rows, int cols, int shift);
 
 // Перегрузки для двумерных массивов типа double
-void FillRand(double arr[][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
+void FillRand(char arr[][MAX_COLS], int rows, int cols);
 void Print(const double arr[][MAX_COLS], int rows, int cols);
 double Sum(const double arr[][MAX_COLS], int rows, int cols);
 double Avg(const double arr[][MAX_COLS], int rows, int cols);
@@ -157,18 +157,6 @@ int minValueIn(const int arr[][MAX_COLS], int rows, int cols) {
     return min_val;
 }
 
-int minValueIn(const int arr[][MAX_COLS], int rows, int cols) {
-    int min_val = arr[0][0];
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (arr[i][j] < min_val) {
-                min_val = arr[i][j];
-            }
-        }
-    }
-    return min_val;
-}
-
 double minValueIn(const double arr[][MAX_COLS], int rows, int cols) {
     double min_val = arr[0][0];
     for (int i = 0; i < rows; i++) {
@@ -191,6 +179,18 @@ char minValueIn(const char ch_arr[][MAX_COLS], int rows, int cols) {
         }
     }
     return min_val;
+}
+
+int maxValueIn(const int arr[][MAX_COLS], int rows, int cols) {
+    int max_val = arr[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (arr[i][j] > max_val) {
+                max_val = arr[i][j];
+            }
+        }
+    }
+    return max_val;
 }
 
 double maxValueIn(const double arr[][MAX_COLS], int rows, int cols) {
