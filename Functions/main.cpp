@@ -3,58 +3,61 @@
 
 #define DEFAULT_MAX_VALUE 10
 #define MAX_COLS 10
+#define MAX_ROWS 10
 
 using namespace std;
 
 // Функции для работы с массивами типа int
-void FillRand(int arr[][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
-void Print(const int arr[][MAX_COLS], int rows, int cols);
-int Sum(const int arr[][MAX_COLS], int rows, int cols);
-double Avg(const int arr[][MAX_COLS], int rows, int cols);
-int minValueIn(const int arr[][MAX_COLS], int rows, int cols);
-int maxValueIn(const int arr[][MAX_COLS], int rows, int cols);
-void shiftLeft(int arr[][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(int arr[][MAX_COLS], int rows, int cols, int shift);
+void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
+void Print(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+int Sum(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double Avg(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+int minValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+int maxValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void shiftLeft(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 
 // Перегрузки для двумерных массивов типа double
-void FillRand(double arr[][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
-void Print(const double arr[][MAX_COLS], int rows, int cols);
-double Sum(const double arr[][MAX_COLS], int rows, int cols);
-double Avg(const double arr[][MAX_COLS], int rows, int cols);
-double minValueIn(const double arr[][MAX_COLS], int rows, int cols);
-double maxValueIn(const double arr[][MAX_COLS], int rows, int cols);
-void shiftLeft(double arr[][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(double arr[][MAX_COLS], int rows, int cols, int shift);
+void FillRand(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
+void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double Avg(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double minValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 
 // Перегрузки для двумерных массивов типа double
-void FillRand(char arr[][MAX_COLS], int rows, int cols);
-void Print(const double arr[][MAX_COLS], int rows, int cols);
-double Sum(const double arr[][MAX_COLS], int rows, int cols);
-double Avg(const double arr[][MAX_COLS], int rows, int cols);
-double minValueIn(const double arr[][MAX_COLS], int rows, int cols);
-double maxValueIn(const double arr[][MAX_COLS], int rows, int cols);
-void shiftLeft(double arr[][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(double arr[][MAX_COLS], int rows, int cols, int shift);
+void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double Avg(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double minValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 
 int main() {
+    setlocale(LC_ALL, "Russian");
     const int rows = 5;
-    int i_arr[rows][MAX_COLS];
-    double d_arr[rows][MAX_COLS];
-    char ch_arr[rows][MAX_COLS];
+    const int cols = 10;
+    int i_arr[rows][cols];
+    double d_arr[rows][cols];
+    char ch_arr[rows][cols];
 
-    FillRand(i_arr, rows, MAX_COLS);
-    Print(i_arr, rows, MAX_COLS);
+    FillRand(i_arr, rows, cols);
+    Print(i_arr, rows, cols);
 
-    cout << "Sum: " << Sum(i_arr, rows, MAX_COLS) << endl;
-    cout << "Avg: " << Avg(i_arr, rows, MAX_COLS) << endl;
-    cout << "Min: " << minValueIn(i_arr, rows, MAX_COLS) << endl;
-    cout << "Max: " << maxValueIn(i_arr, rows, MAX_COLS) << endl;
+    cout << "Сумма: " << Sum(i_arr, rows, cols) << endl;
+    cout << "Среднее значение: " << Avg(i_arr, rows, cols) << endl;
+    cout << "Минимальное значение: " << minValueIn(i_arr, rows, cols) << endl;
+    cout << "Максимальное значение: " << maxValueIn(i_arr, rows, cols) << endl;
 
-    shiftLeft(i_arr, rows, MAX_COLS, 3);
-    Print(i_arr, rows, MAX_COLS);
+    shiftLeft(i_arr, rows, cols, 3);
+    Print(i_arr, rows, cols);
 
-    shiftRight(i_arr, rows, MAX_COLS, 3);
-    Print(i_arr, rows, MAX_COLS);
+    shiftRight(i_arr, rows, cols, 3);
+    Print(i_arr, rows, cols);
 
     return 0;
 }
@@ -76,11 +79,12 @@ void FillRand(char arr[][MAX_COLS], int rows, int cols) {
 }
 
 void Print(const int arr[][MAX_COLS], int rows, int cols) {
+    cout << "Элемненты массива:\n";
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            cout << arr[i][j] << ' ';
+            cout << arr[i][j] << "\t";
         }
-        cout << endl;
+        cout << "\n";
     }
 }
 
@@ -92,7 +96,6 @@ void Print(const double arr[][MAX_COLS], int rows, int cols) {
         cout << endl;
     }
 }
-
 
 void Print(const char arr[][MAX_COLS], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
