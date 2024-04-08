@@ -27,15 +27,15 @@ double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 
-// Перегрузки для двумерных массивов типа double
+// Перегрузки для двумерных массивов типа char
 void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Avg(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double minValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+void Print(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+char Sum(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+char Avg(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+char minValueIn(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+char maxValueIn(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void shiftLeft(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+void shiftRight(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 
 int main() {
     setlocale(LC_ALL, "Russian");
