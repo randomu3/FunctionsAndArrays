@@ -303,7 +303,6 @@ void Sort(int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
         for (int j = 0; j < cols; j++) {
             for (int k = 0; k < cols - j - 1; k++) {
                 if (arr[i][k] > arr[i][k + 1]) {
-                    // Простая замена местами
                     int temp = arr[i][k];
                     arr[i][k] = arr[i][k + 1];
                     arr[i][k + 1] = temp;
@@ -318,7 +317,6 @@ void Sort(double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
         for (int j = 0; j < cols; j++) {
             for (int k = 0; k < cols - j - 1; k++) {
                 if (arr[i][k] > arr[i][k + 1]) {
-                    // Простая замена местами
                     double temp = arr[i][k];
                     arr[i][k] = arr[i][k + 1];
                     arr[i][k + 1] = temp;
@@ -333,7 +331,6 @@ void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
         for (int j = 0; j < cols - 1; j++) {
             for (int k = 0; k < cols - j - 1; k++) {
                 if (arr[i][k] > arr[i][k + 1]) {
-                    // Простая замена местами
                     char temp = arr[i][k];
                     arr[i][k] = arr[i][k + 1];
                     arr[i][k + 1] = temp;
