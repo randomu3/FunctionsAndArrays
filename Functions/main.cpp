@@ -17,6 +17,7 @@ int maxValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void shiftLeft(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void Sort(int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
 
 // Перегрузки для двумерных массивов типа double
 void FillRand(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
@@ -28,6 +29,7 @@ double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void Sort(double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
 
 // Перегрузки для двумерных массивов типа char
 void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
@@ -39,14 +41,15 @@ char maxValueIn(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void shiftLeft(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void shiftRight(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+void Unique(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 
 int main() {
     setlocale(LC_ALL, "Russian");
     const int rows = 5;
     const int cols = 10;
     int i_arr[rows][cols];
-    double d_arr[rows][cols];
-    char ch_arr[rows][cols];
+    //double d_arr[rows][cols];
+    //char ch_arr[rows][cols];
 
     FillRand(i_arr, rows, cols);
     Print(i_arr, rows, cols);
@@ -63,6 +66,9 @@ int main() {
     Print(i_arr, rows, cols);
 
     shiftRight(i_arr, rows, cols, 3);
+    Print(i_arr, rows, cols);
+
+    Unique(i_arr, rows, cols, 60);
     Print(i_arr, rows, cols);
 
     return 0;
@@ -336,6 +342,103 @@ void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
                     arr[i][k + 1] = temp;
                 }
             }
+        }
+    }
+}
+
+void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
+    if (rows * cols > max) {
+        cout << "Ошибка: невозможно заполнить массив уникальными числами, так как количество элементов превышает максимально возможное значение." << endl;
+        return;
+    }
+
+    int filled = 0;
+    while (filled < rows * cols) {
+        int random_number = rand() % max;
+        bool already_exists = false;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (arr[i][j] == random_number) {
+                    already_exists = true;
+                    break;
+                }
+            }
+            if (already_exists) {
+                break;
+            }
+        }
+
+        if (!already_exists) {
+            int rowIndex = filled / cols;
+            int colIndex = filled % cols;
+            arr[rowIndex][colIndex] = random_number;
+            filled++;
+        }
+    }
+}
+
+void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max) {
+    if (rows * cols > max) {
+        cout << "Ошибка: невозможно заполнить массив уникальными числами, так как количество элементов превышает максимально возможное значение." << endl;
+        return;
+    }
+
+    int filled = 0;
+    while (filled < rows * cols) {
+        double random_number = (double)(rand()) / RAND_MAX * max;
+        random_number = floor(random_number);
+        bool already_exists = false;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if ((int)arr[i][j] == (int)random_number) {
+                    already_exists = true;
+                    break;
+                }
+            }
+            if (already_exists) {
+                break;
+            }
+        }
+
+        if (!already_exists) {
+            int rowIndex = filled / cols;
+            int colIndex = filled % cols;
+            arr[rowIndex][colIndex] = random_number;
+            filled++;
+        }
+    }
+}
+
+void Unique(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    if (rows * cols > 26) {
+        cout << "Ошибка: невозможно заполнить массив уникальными буквами." << endl;
+        return;
+    }
+
+    int filled = 0;
+    while (filled < rows * cols) {
+        char random_char = 'a' + rand() % 26;
+        bool already_exists = false;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (arr[i][j] == random_char) {
+                    already_exists = true;
+                    break;
+                }
+            }
+            if (already_exists) {
+                break;
+            }
+        }
+
+        if (!already_exists) {
+            int rowIndex = filled / cols;
+            int colIndex = filled % cols;
+            arr[rowIndex][colIndex] = random_char;
+            filled++;
         }
     }
 }
