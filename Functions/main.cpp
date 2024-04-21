@@ -11,38 +11,53 @@ using namespace std;
 template <typename T>
 void Search(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 
-void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
+template <typename T>
+void FillRand(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, T max = DEFAULT_MAX_VALUE);
+template <>
+void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max);
+template <>
+void FillRand(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max);
+template <>
+void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, char max);
+
+template <typename T>
+void Print(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+template <>
 void Print(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-int Sum(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Avg(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-int minValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-int maxValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void shiftLeft(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void Sort(int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
-
-void FillRand(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
+template <>
 void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Avg(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double minValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void Sort(double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
-
-void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+template <>
 void Print(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-int Sum(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-double Avg(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-char minValueIn(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-char maxValueIn(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void shiftLeft(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void shiftRight(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
-void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
-void Unique(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+T Sum(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+double Avg(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+T minValueIn(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+T maxValueIn(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+void shiftLeft(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+
+template <typename T>
+void shiftRight(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
+
+template <typename T>
+void Sort(T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
+template <typename T>
+void Unique(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, T max);
+template <>
+void Unique<int>(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max);
+template <>
+void Unique<double>(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max);
+template <>
+void Unique<char>(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, char max);
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -52,7 +67,7 @@ int main() {
     //double d_arr[rows][cols];
     //char ch_arr[rows][cols];
 
-    FillRand(i_arr, rows, cols);
+    FillRand(i_arr, rows, cols, DEFAULT_MAX_VALUE);
     Print(i_arr, rows, cols);
 
     Search(i_arr, rows, cols);
@@ -77,7 +92,8 @@ int main() {
     return 0;
 }
 
-void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
+template <>
+void FillRand<int>(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             arr[i][j] = rand() % max;
@@ -85,7 +101,17 @@ void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
     }
 }
 
-void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <>
+void FillRand<double>(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            arr[i][j] = (double)rand() / RAND_MAX * max;
+        }
+    }
+}
+
+template <>
+void FillRand<char>(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, char max) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             arr[i][j] = 'a' + rand() % 26;
@@ -93,7 +119,8 @@ void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     }
 }
 
-void Print(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <>
+void Print<int>(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     cout << "Элемненты массива:\n";
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -103,7 +130,8 @@ void Print(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     }
 }
 
-void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <>
+void Print<double>(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             cout << arr[i][j] << ' ';
@@ -112,7 +140,8 @@ void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     }
 }
 
-void Print(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <>
+void Print<char>(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             cout << arr[i][j] << ' ';
@@ -121,52 +150,28 @@ void Print(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     }
 }
 
-int Sum(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    int sum = 0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            sum += arr[i][j];
-        }
-    }
-    return sum;
-}
-
-double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    double sum = 0.0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            sum += arr[i][j];
-        }
-    }
-    return sum;
-}
-
-int Sum(const char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    int sum = 0;
+template <typename T>
+T Sum(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    T sum = 0;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            sum += ch_arr[i][j];
+            sum += arr[i][j];
         }
     }
     return sum;
 }
 
-double Avg(const int i_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    return Sum(i_arr, rows, cols) / (double)(rows * cols);
+template <typename T>
+double Avg(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    double sum = (double)(Sum(arr, rows, cols));
+    return sum / (rows * cols);
 }
 
-double Avg(const double d_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    return Sum(d_arr, rows, cols) / (rows * cols);
-}
-
-double Avg(const char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    return Sum(ch_arr, rows, cols) / (double)(rows * cols);
-}
-
-int minValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    int min_val = arr[0][0];
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+template <typename T>
+T minValueIn(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    T min_val = arr[0][0];
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             if (arr[i][j] < min_val) {
                 min_val = arr[i][j];
             }
@@ -175,10 +180,11 @@ int minValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     return min_val;
 }
 
-int maxValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    int max_val = arr[0][0];
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+template <typename T>
+T maxValueIn(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    T max_val = arr[0][0];
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             if (arr[i][j] > max_val) {
                 max_val = arr[i][j];
             }
@@ -187,58 +193,11 @@ int maxValueIn(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     return max_val;
 }
 
-double minValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    double min_val = arr[0][0];
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (arr[i][j] < min_val) {
-                min_val = arr[i][j];
-            }
-        }
-    }
-    return min_val;
-}
-
-char minValueIn(const char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    char min_val = ch_arr[0][0];
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            if (ch_arr[i][j] < min_val) {
-                min_val = ch_arr[i][j];
-            }
-        }
-    }
-    return min_val;
-}
-
-double maxValueIn(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    double max_val = arr[0][0];
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (arr[i][j] > max_val) {
-                max_val = arr[i][j];
-            }
-        }
-    }
-    return max_val;
-}
-
-char maxValueIn(const char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    char max_val = ch_arr[0][0];
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            if (ch_arr[i][j] > max_val) {
-                max_val = ch_arr[i][j];
-            }
-        }
-    }
-    return max_val;
-}
-
-void shiftLeft(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
+template <typename T>
+void shiftLeft(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
     for (int k = 0; k < shift; k++) {
         for (int i = 0; i < rows; i++) {
-            int temp = arr[i][0];
+            T temp = arr[i][0];
             for (int j = 0; j < cols - 1; j++) {
                 arr[i][j] = arr[i][j + 1];
             }
@@ -247,34 +206,11 @@ void shiftLeft(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
     }
 }
 
-void shiftLeft(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
+template <typename T>
+void shiftRight(T arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
     for (int k = 0; k < shift; k++) {
         for (int i = 0; i < rows; i++) {
-            double temp = arr[i][0];
-            for (int j = 0; j < cols - 1; j++) {
-                arr[i][j] = arr[i][j + 1];
-            }
-            arr[i][cols - 1] = temp;
-        }
-    }
-}
-
-void shiftLeft(char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
-    for (int k = 0; k < shift; k++) {
-        for (int i = 0; i < rows; i++) {
-            char temp = ch_arr[i][0];
-            for (int j = 0; j < cols - 1; j++) {
-                ch_arr[i][j] = ch_arr[i][j + 1];
-            }
-            ch_arr[i][cols - 1] = temp;
-        }
-    }
-}
-
-void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
-    for (int k = 0; k < shift; k++) {
-        for (int i = 0; i < rows; i++) {
-            int temp = arr[i][cols - 1];
+            T temp = arr[i][cols - 1];
             for (int j = cols - 1; j > 0; j--) {
                 arr[i][j] = arr[i][j - 1];
             }
@@ -283,64 +219,13 @@ void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
     }
 }
 
-void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
-    for (int k = 0; k < shift; k++) {
-        for (int i = 0; i < rows; i++) {
-            double temp = arr[i][cols - 1];
-            for (int j = cols - 1; j > 0; j--) {
-                arr[i][j] = arr[i][j - 1];
-            }
-            arr[i][0] = temp;
-        }
-    }
-}
-
-void shiftRight(char ch_arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift) {
-    for (int k = 0; k < shift; k++) {
-        for (int i = 0; i < rows; i++) {
-            char temp = ch_arr[i][cols - 1];
-            for (int j = cols - 1; j > 0; j--) {
-                ch_arr[i][j] = ch_arr[i][j - 1];
-            }
-            ch_arr[i][0] = temp;
-        }
-    }
-}
-
-void Sort(int arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            for (int k = 0; k < cols - j - 1; k++) {
-                if (arr[i][k] > arr[i][k + 1]) {
-                    int temp = arr[i][k];
-                    arr[i][k] = arr[i][k + 1];
-                    arr[i][k + 1] = temp;
-                }
-            }
-        }
-    }
-}
-
-void Sort(double arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            for (int k = 0; k < cols - j - 1; k++) {
-                if (arr[i][k] > arr[i][k + 1]) {
-                    double temp = arr[i][k];
-                    arr[i][k] = arr[i][k + 1];
-                    arr[i][k + 1] = temp;
-                }
-            }
-        }
-    }
-}
-
-void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <typename T>
+void Sort(T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols - 1; j++) {
             for (int k = 0; k < cols - j - 1; k++) {
                 if (arr[i][k] > arr[i][k + 1]) {
-                    char temp = arr[i][k];
+                    T temp = arr[i][k];
                     arr[i][k] = arr[i][k + 1];
                     arr[i][k + 1] = temp;
                 }
@@ -349,7 +234,8 @@ void Sort(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
     }
 }
 
-void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
+template <>
+void Unique<int>(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
     if (rows * cols > max) {
         cout << "Ошибка: невозможно заполнить массив уникальными числами, так как количество элементов превышает максимально возможное значение." << endl;
         return;
@@ -381,7 +267,8 @@ void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max) {
     }
 }
 
-void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max) {
+template <>
+void Unique<double>(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max) {
     if (rows * cols > max) {
         cout << "Ошибка: невозможно заполнить массив уникальными числами, так как количество элементов превышает максимально возможное значение." << endl;
         return;
@@ -414,7 +301,8 @@ void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max) {
     }
 }
 
-void Unique(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+template <>
+void Unique<char>(char arr[MAX_ROWS][MAX_COLS], int rows, int cols, char max) {
     if (rows * cols > 26) {
         cout << "Ошибка: невозможно заполнить массив уникальными буквами." << endl;
         return;
