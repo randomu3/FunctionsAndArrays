@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <cstdlib>
+#include <map>
 
 #define DEFAULT_MAX_VALUE 10
 #define MAX_COLS 10
@@ -7,7 +8,9 @@
 
 using namespace std;
 
-// Перегрузки для двумерных массивов типа int
+template <typename T>
+void Search(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols);
+
 void FillRand(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
 void Print(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 int Sum(const int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
@@ -19,7 +22,6 @@ void shiftRight(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void Sort(int arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void Unique(int arr[MAX_ROWS][MAX_COLS], int rows, int cols, int max = DEFAULT_MAX_VALUE);
 
-// Перегрузки для двумерных массивов типа double
 void FillRand(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
 void Print(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 double Sum(const double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
@@ -31,7 +33,6 @@ void shiftRight(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, int shift);
 void Sort(double arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void Unique(double arr[MAX_ROWS][MAX_COLS], int rows, int cols, double max = DEFAULT_MAX_VALUE);
 
-// Перегрузки для двумерных массивов типа char
 void FillRand(char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 void Print(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
 int Sum(const char arr[MAX_ROWS][MAX_COLS], int rows, int cols);
@@ -53,6 +54,8 @@ int main() {
 
     FillRand(i_arr, rows, cols);
     Print(i_arr, rows, cols);
+
+    Search(i_arr, rows, cols);
 
     cout << "Сумма: " << Sum(i_arr, rows, cols) << endl;
     cout << "Среднее значение: " << Avg(i_arr, rows, cols) << endl;
@@ -439,6 +442,24 @@ void Unique(char arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
             int colIndex = filled % cols;
             arr[rowIndex][colIndex] = random_char;
             filled++;
+        }
+    }
+}
+
+template <typename T>
+void Search(const T arr[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    map<T, int> count_map;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            count_map[arr[i][j]]++;
+        }
+    }
+
+    cout << "Повторяющиеся элементы:\n";
+    for (const auto& element : count_map) {
+        if (element.second > 1) {
+            cout << element.first << " встречается " << element.second << " раз(а)\n";
         }
     }
 }
