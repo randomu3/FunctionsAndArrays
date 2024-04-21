@@ -128,6 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatrixManipulations.cpp" />
+    <ClCompile Include="MatrixManipulations.h" />
+    <ClCompile Include="MatrixStats.cpp" />
+    <ClCompile Include="MatrixUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MatrixStats.h" />
+    <ClInclude Include="MatrixUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
